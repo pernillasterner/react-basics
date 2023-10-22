@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BlogList } from "./BlogList";
 
 export const Home = () => {
@@ -13,10 +13,16 @@ export const Home = () => {
     },
   ]);
 
+  const [name, setName] = useState("mario");
+
   const handleDelete = (id) => {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
   };
+  /* run this function everytime name changes. don´t run this function when the blog state has changed */
+  useEffect(() => {
+    console.log("use effect ran");
+  }, [name]); // add name as a dependency and it will watch this value
 
   return (
     <div className="home">
@@ -26,6 +32,8 @@ export const Home = () => {
         blogs={blogs.filter((blog) => blog.author === "mario")}
         title="Mario´s blogs"
       />
+      <button onClick={() => setName("luigi")}>change name</button>
+      <p>{name}</p>
     </div>
   );
 };
