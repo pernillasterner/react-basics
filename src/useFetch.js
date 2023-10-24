@@ -32,4 +32,4 @@ export const useFetch = (url) => {
   return { data, isPending, error };
 };
 
-// export default useFetch;
+export default useFetch;
